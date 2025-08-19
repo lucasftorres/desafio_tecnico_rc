@@ -1,0 +1,20 @@
+site_name: Desafio Técnico RC
+theme:
+  name: material
+  palette:
+    primary: teal
+  language: pt
+
+repo_name: 'lucasftorres/desafio_tecnico_rc'
+repo_url: 'https://github.com/lucasftorres/desafio_tecnico_rc'
+
+markdown_extensions:
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+
+plugins:
+  - search
+  - mkdocstrings:
+      default_handler: python
