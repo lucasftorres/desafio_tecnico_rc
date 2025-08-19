@@ -34,7 +34,7 @@ flowchart TD
 
 # ETL
 
-## Extração
+## [Extração]
 
 As seguintes tabelas foram extraídas para iniciar o processo ETL:
 
@@ -113,7 +113,7 @@ As seguintes tabelas foram extraídas para iniciar o processo ETL:
 
 ---
 
-## Transformação
+## [Transformação]
 
 Principais etapas de transformação realizadas:
 
@@ -158,3 +158,6 @@ Principais etapas de transformação realizadas:
 - O processo de padronização e geração de surrogate keys facilita o relacionamento e indexação entre as tabelas do Data Warehouse.
 
 
+## [Carga]
+
+- As tabelas dimensão e fato foram salvas no formato .csv para carregamento no Microsoft Power BI
