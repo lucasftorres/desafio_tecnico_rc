@@ -2,7 +2,7 @@ site_name: Desafio Técnico - RC
 theme:
   name: material
   palette:
-    primary: teal
+    primary: purple
   language: pt
 
 repo_name: 'lucasftorres/desafio_tecnico_rc'

@@ -32,10 +32,14 @@ flowchart TD
 ```
 
 
-# ETL
+## ETL
 
-## [Extração]
+## Extração
 
+- Extração simples utilizando pandas com a função read_csv() e ';' como separador.
+
+
+## Checagem e Processamento
 As seguintes tabelas foram extraídas para iniciar o processo ETL:
 
 ### Tabela `Vendas.csv`
@@ -74,46 +78,55 @@ As seguintes tabelas foram extraídas para iniciar o processo ETL:
 
 ---
 
-## Checagem e Processamento
-
 ### Duplicidades Encontradas
 
 - **Produtos.csv**
   - Encontrados **1,938 produtos (18.8% do total)** com mesmo nome, mas IDs diferentes.
-  - Exemplo:
-  
-    | ID Produto         | Categoria   | SubCategoria | Nome Produto                                   |
-    |--------------------|-------------|--------------|------------------------------------------------|
-    | TEC-AC-10003033    | Tecnologia  | Accessories  | Plantronics CS510 - Over-the-Head monaural ... |
+
+    |   | nome_produto                               | Quantidade |
+    |---|--------------------------------------------|------------|
+    | 0 | Staples                                   | 45         |
+    | 1 | Stockwell Paper Clips, Assorted Sizes      | 16         |
+    | 2 | Acco Index Tab, Clear                     | 12         |
+    | 3 | Bush Stackable Bookrack, Pine              | 11         |
+    | 4 | Stockwell Thumb Tacks, Metal              | 11         |
+    |...| ...                                       | ...        |
+    |1933| Advantus Light Bulb, Black               | 2          |
+    |1934| Panasonic Inkjet, Durable                | 2          |
+    |1935| Hon Computer Table, with Bottom Storage  | 2          |
+    |1936| Prang Drawing Pencil Set                 | 2          |
+    |1937| Bevis Round Table, Rectangular           | 2          |
+                                | ...        |
 
   - Apenas **2 produtos** estavam presentes em subcategorias diferentes.
-  - Produtos com nomes mais recorrentes:
-  
-    | nome_produto                      | Quantidade |
-    |-----------------------------------|------------|
-    | Staples                           | 45         |
-    | Stockwell Paper Clips, Assorted   | 16         |
-    | ...                               | ...        |
+
+    | nome_produto                                     | subcategoria |
+    |--------------------------------------------------|-------------|
+    | Harbour Creations Executive Leather Armchair, ...|      2      |
+    | Staples                                          |     10      |
+
 
 - **Clientes.csv**
-  - Muitos nomes repetidos, porém com cidade/estado/região diferentes.
-  - Risco de confusão entre homônimos ou perfis distintos ao fazer merges apenas pelo nome.
+    - Muitos nomes repetidos, porém com cidade/estado/região diferentes.
+    - Risco de confusão entre homônimos ou perfis distintos ao fazer merges apenas pelo nome.
+
 
 - **Pedidos.csv**
-  - **3,518 registros** têm o mesmo `pedido_num`, indicando duplicidade significativa.
-  - Exemplo:
+    - **3,518 registros** têm o mesmo `pedido_num`, indicando duplicidade significativa.
+    - Exemplo:
 
     | Local Pedido | Ano | ID Pedido | Data Pedido | ... |
     |--------------|-----|-----------|-------------|-----|
     | CA           | 2012| 124891    | 31/07/2012  | ... |
     | CA           | 2012| 124891    | 31/07/2012  | ... |
 
+
 - **Vendas.csv**
-  - Após padronização de IDs de produtos, **32,281 vendas (~63%)** apresentavam IDs diferentes para o mesmo nome de produto.
+    - Após padronização de IDs de produtos, **32,281 vendas (~63%)** apresentavam IDs diferentes para o mesmo nome de produto.
 
----
 
-## [Transformação]
+
+## Transformação
 
 Principais etapas de transformação realizadas:
 
@@ -158,6 +171,6 @@ Principais etapas de transformação realizadas:
 - O processo de padronização e geração de surrogate keys facilita o relacionamento e indexação entre as tabelas do Data Warehouse.
 
 
-## [Carga]
+## Carga
 
 - As tabelas dimensão e fato foram salvas no formato .csv para carregamento no Microsoft Power BI
