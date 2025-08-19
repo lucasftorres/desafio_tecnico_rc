@@ -68,7 +68,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#welcome-to-mkdocs" class="md-skip">
+        <a href="#bem-vindo" class="md-skip">
           Ir para o conteúdo
         </a>
       
@@ -104,7 +104,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Welcome to MkDocs
+              Bem vindo
             
           </span>
         </div>
@@ -238,7 +238,7 @@
   
   
   <span class="md-ellipsis">
-    Welcome to MkDocs
+    Bem vindo
     
   </span>
   
@@ -251,7 +251,7 @@
   
   
   <span class="md-ellipsis">
-    Welcome to MkDocs
+    Bem vindo
     
   </span>
   
@@ -274,18 +274,9 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#commands" class="md-nav__link">
+  <a href="#workflow" class="md-nav__link">
     <span class="md-ellipsis">
-      Commands
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#project-layout" class="md-nav__link">
-    <span class="md-ellipsis">
-      Project layout
+      Workflow
     </span>
   </a>
   
@@ -326,18 +317,9 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#commands" class="md-nav__link">
+  <a href="#workflow" class="md-nav__link">
     <span class="md-ellipsis">
-      Commands
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#project-layout" class="md-nav__link">
-    <span class="md-ellipsis">
-      Project layout
+      Workflow
     </span>
   </a>
   
@@ -362,21 +344,299 @@
   
 
 
-<h1 id="welcome-to-mkdocs">Welcome to MkDocs</h1>
-<p>For full documentation visit <a href="https://www.mkdocs.org">mkdocs.org</a>.</p>
-<h2 id="commands">Commands</h2>
-<ul>
-<li><code>mkdocs new [dir-name]</code> - Create a new project.</li>
-<li><code>mkdocs serve</code> - Start the live-reloading docs server.</li>
-<li><code>mkdocs build</code> - Build the documentation site.</li>
-<li><code>mkdocs -h</code> - Print help message and exit.</li>
-</ul>
-<h2 id="project-layout">Project layout</h2>
-<pre><code>mkdocs.yml    # The configuration file.
-docs/
-    index.md  # The documentation homepage.
-    ...       # Other markdown pages, images and other files.
+<h1 id="bem-vindo">Bem vindo</h1>
+<h2 id="workflow">Workflow</h2>
+<pre class="mermaid"><code>flowchart TD
+
+    VendasCSV[Vendas.csv] --&gt; Vendas
+    ClientesCSV[Clientes.csv] --&gt; Clientes
+    PedidosCSV[Pedidos.csv] --&gt; Pedidos
+    ProdutosCSV[Produtos.csv] --&gt; Produtos
+
+    Vendas --&gt; TratamentoVendas[Tratamento Vendas]
+    Clientes --&gt; TratamentoClientes[Tratamento Clientes]
+    Pedidos --&gt; TratamentoPedidos[Tratamento Pedidos]
+    Produtos --&gt; TratamentoProdutos[Tratamento Produtos]
+
+    TratamentoVendas --&gt; FatoVendas[Fato Vendas]
+    TratamentoClientes --&gt; DimClientes[Dim Clientes]
+    TratamentoPedidos --&gt; DimPedidos[Dim Pedidos]
+    TratamentoProdutos --&gt; DimProdutos[Dim Produtos]
+
+    TratamentoPedidos --&gt; DimData[Dim Data]
+
+    FatoVendas --&gt; FatoCSV[fato_vendas.csv]
+    DimClientes --&gt; ClientesCSVOut[dim_clientes.csv]
+    DimPedidos --&gt; PedidosCSVOut[dim_pedidos.csv]
+    DimProdutos --&gt; ProdutosCSVOut[dim_produtos.csv]
+    DimData --&gt; DataCSVOut[dim_data.csv]
 </code></pre>
+<h1 id="etl">ETL</h1>
+<h2 id="extracao">Extração</h2>
+<p>As seguintes tabelas foram extraídas para iniciar o processo ETL:</p>
+<h3 id="tabela-vendascsv">Tabela <code>Vendas.csv</code></h3>
+<ul>
+<li><strong>Linhas:</strong> 51,290</li>
+<li><strong>Colunas:</strong> 6</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Pedido</th>
+<th>Cliente</th>
+<th>Produto</th>
+<th>Valor Venda</th>
+<th>Quantidade Venda</th>
+<th>Custo Envio</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="tabela-clientescsv">Tabela <code>Clientes.csv</code></h3>
+<ul>
+<li><strong>Linhas:</strong> 1,590</li>
+<li><strong>Colunas:</strong> 8</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>ID Cliente</th>
+<th>Nome Cliente</th>
+<th>Segmento</th>
+<th>Cidade</th>
+<th>Estado</th>
+<th>País</th>
+<th>Mercado</th>
+<th>Região</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="tabela-produtoscsv">Tabela <code>Produtos.csv</code></h3>
+<ul>
+<li><strong>Linhas:</strong> 10,292</li>
+<li><strong>Colunas:</strong> 4</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>ID Produto</th>
+<th>Categoria</th>
+<th>SubCategoria</th>
+<th>Nome Produto</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="tabela-pedidoscsv">Tabela <code>Pedidos.csv</code></h3>
+<ul>
+<li><strong>Linhas:</strong> 25,036</li>
+<li><strong>Colunas:</strong> 7</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Local Pedido</th>
+<th>Ano</th>
+<th>ID Pedido</th>
+<th>Data Pedido</th>
+<th>Data Envio</th>
+<th>Modo Envio</th>
+<th>Prioridade Pedido</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="checagem-e-processamento">Checagem e Processamento</h2>
+<h3 id="duplicidades-encontradas">Duplicidades Encontradas</h3>
+<ul>
+<li><strong>Produtos.csv</strong></li>
+<li>Encontrados <strong>1,938 produtos (18.8% do total)</strong> com mesmo nome, mas IDs diferentes.</li>
+<li>
+<p>Exemplo:</p>
+<table>
+<thead>
+<tr>
+<th>ID Produto</th>
+<th>Categoria</th>
+<th>SubCategoria</th>
+<th>Nome Produto</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TEC-AC-10003033</td>
+<td>Tecnologia</td>
+<td>Accessories</td>
+<td>Plantronics CS510 - Over-the-Head monaural ...</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>Apenas <strong>2 produtos</strong> estavam presentes em subcategorias diferentes.</p>
+</li>
+<li>
+<p>Produtos com nomes mais recorrentes:</p>
+<table>
+<thead>
+<tr>
+<th>nome_produto</th>
+<th>Quantidade</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Staples</td>
+<td>45</td>
+</tr>
+<tr>
+<td>Stockwell Paper Clips, Assorted</td>
+<td>16</td>
+</tr>
+<tr>
+<td>...</td>
+<td>...</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p><strong>Clientes.csv</strong></p>
+</li>
+<li>Muitos nomes repetidos, porém com cidade/estado/região diferentes.</li>
+<li>
+<p>Risco de confusão entre homônimos ou perfis distintos ao fazer merges apenas pelo nome.</p>
+</li>
+<li>
+<p><strong>Pedidos.csv</strong></p>
+</li>
+<li><strong>3,518 registros</strong> têm o mesmo <code>pedido_num</code>, indicando duplicidade significativa.</li>
+<li>
+<p>Exemplo:</p>
+<table>
+<thead>
+<tr>
+<th>Local Pedido</th>
+<th>Ano</th>
+<th>ID Pedido</th>
+<th>Data Pedido</th>
+<th>...</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CA</td>
+<td>2012</td>
+<td>124891</td>
+<td>31/07/2012</td>
+<td>...</td>
+</tr>
+<tr>
+<td>CA</td>
+<td>2012</td>
+<td>124891</td>
+<td>31/07/2012</td>
+<td>...</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p><strong>Vendas.csv</strong></p>
+</li>
+<li>Após padronização de IDs de produtos, <strong>32,281 vendas (~63%)</strong> apresentavam IDs diferentes para o mesmo nome de produto.</li>
+</ul>
+<hr />
+<h2 id="transformacao">Transformação</h2>
+<p>Principais etapas de transformação realizadas:</p>
+<h3 id="1-tratamentos-gerais">1. Tratamentos Gerais</h3>
+<ul>
+<li>Conversão de datas na tabela de pedidos.</li>
+<li>Renomeação de colunas para padronização.</li>
+<li>Conversão de tipos (de texto para numérico) em vendas.</li>
+<li>Criação das colunas <code>valor_unit</code> (vendas) e <code>id_pedido</code> (pedidos).</li>
+</ul>
+<h3 id="2-tabela-dimensional-de-produtos-dim_produtos">2. Tabela Dimensional de Produtos (<code>dim_produtos</code>)</h3>
+<ul>
+<li>Unificação de IDs para produtos com nomes repetidos (<code>10,292</code> → <code>3,660</code>).</li>
+<li>Criação de surrogate key <code>sk_produto</code>.</li>
+<li>Checagem cruzada entre produto e vendas.</li>
+</ul>
+<h3 id="3-tabela-dimensional-de-clientes-dim_clientes">3. Tabela Dimensional de Clientes (<code>dim_clientes</code>)</h3>
+<ul>
+<li>Criação da surrogate key <code>sk_cliente</code>.</li>
+</ul>
+<h3 id="4-tabela-dimensional-de-pedidos-dim_pedidos">4. Tabela Dimensional de Pedidos (<code>dim_pedidos</code>)</h3>
+<ul>
+<li>Criação da surrogate key <code>sk_pedido</code>.</li>
+</ul>
+<h3 id="5-tabela-dimensional-de-datas-dim_data">5. Tabela Dimensional de Datas (<code>dim_data</code>)</h3>
+<ul>
+<li>Criação a partir de datas de pedido e envio.</li>
+<li>Associação com a tabela de pedidos.</li>
+</ul>
+<h3 id="6-organizacao-das-colunas">6. Organização das Colunas</h3>
+<ul>
+<li>Remoção de colunas temporárias.</li>
+<li>Reordenação das colunas finais.</li>
+<li>Geração da tabela fato final <code>fato_vendas</code>.</li>
+</ul>
+<h3 id="7-analise-de-outliers">7. Análise de Outliers</h3>
+<ul>
+<li><strong>valor_venda:</strong> 5,655 registros identificados como outliers.</li>
+<li><strong>custo_envio:</strong> 5,022 registros identificados como outliers.</li>
+<li>Outliers podem distorcer análises estatísticas e indicar oportunidades de investigação e ajuste de dados.</li>
+</ul>
+<hr />
+<h2 id="observacoes-relevantes">Observações Relevantes</h2>
+<ul>
+<li>O tratamento de duplicidades foi essencial para garantir a integridade das dimensões (clientes, produtos, pedidos).</li>
+<li>A unificação de IDs para produtos com mesmo nome resultou em redução expressiva na cardinalidade dessa dimensão.</li>
+<li>A identificação de outliers contribuiu para maior qualidade e confiabilidade dos dados.</li>
+<li>O processo de padronização e geração de surrogate keys facilita o relacionamento e indexação entre as tabelas do Data Warehouse.</li>
+</ul>
 
 
 
